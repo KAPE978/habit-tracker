@@ -105,7 +105,7 @@ padding: 8px 18px; flex-shrink: 0; gap: 10px;
 
 /* ── HABIT GRID ── */
 .habit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
-.habit-toggle { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 9px 5px; background: var(–surface); border-radius: 10px; cursor: pointer; border: 1.5px solid var(–border); transition: all 0.12s; user-select: none; -webkit-user-select: none; position: relative; touch-action: manipulation; }
+.habit-toggle { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 9px 5px; background: var(–surface); border-radius: 10px; cursor: pointer; border: 1.5px solid var(–border); transition: all 0.12s; user-select: none; -webkit-user-select: none; position: relative; touch-action: manipulation; -webkit-appearance: none; font-family: var(–font-mono); width: 100%; }
 .habit-toggle.checked { background: var(–accent-dim); border-color: var(–accent); }
 .habit-toggle .emoji { font-size: 18px; line-height: 1; }
 .habit-toggle .hlabel { font-size: 7.5px; color: var(–muted2); text-align: center; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.3; }
@@ -540,10 +540,9 @@ function renderDays(from,to){
     trackerList.appendChild(card);
     const grid=card.querySelector(`#grid-${key}`);
     HABITS.forEach(h=>{
-      const btn=document.createElement('div');
+      const btn=document.createElement('button');
+      btn.type='button';
       btn.className='habit-toggle'+(dayData[h.key]?' checked':'');
-      btn.setAttribute('role','button');
-      btn.style.cursor='pointer';
       btn.innerHTML=`<span class="htick">✓</span><span class="emoji">${h.emoji}</span><span class="hlabel">${h.label}</span>`;
       function toggleHabit(e){
         e.preventDefault(); e.stopPropagation();
